@@ -1,4 +1,4 @@
-import type { JSX } from "react";
+import type { ButtonHTMLAttributes, JSX } from "react";
 
 import clsx from "clsx";
 
@@ -13,15 +13,17 @@ export enum TextButtonVariants {
 }
 
 interface TextButtonProps {
+  type: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   variant: TextButtonVariants;
   size: TextButtonSizes;
   label: string;
   icon?: JSX.Element;
+  className?: string;
   onClick?: () => void;
 }
 
 const TextButton = (props: TextButtonProps) => {
-  const { variant, size, label, icon, onClick } = props;
+  const { type, variant, size, label, icon, className, onClick } = props;
 
   const variantClassNames = {
     primary: "border border-primary-border bg-transparent",
@@ -35,12 +37,13 @@ const TextButton = (props: TextButtonProps) => {
 
   return (
     <button
-      type="button"
+      type={type}
       onClick={onClick}
       className={clsx(
-        "flex items-center justify-center gap-2 rounded-[14px] px-2",
+        "flex cursor-pointer items-center justify-center gap-2 rounded-[14px] px-2",
         variantClassNames[variant],
         sizesClassName[size],
+        className,
       )}
     >
       <span className="text-size-lg leading-7 font-semibold">{label}</span>

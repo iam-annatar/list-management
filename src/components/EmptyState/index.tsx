@@ -1,6 +1,12 @@
 import TriggerCreateListModal from "../shared/TriggerCreateListModal";
 
-const ListsEmptyState = () => {
+interface ListsEmptyStateProps {
+  onOpenCreateModal: () => void;
+}
+
+const ListsEmptyState = (props: ListsEmptyStateProps) => {
+  const { onOpenCreateModal } = props;
+
   return (
     <section
       aria-label="List management intro"
@@ -12,7 +18,7 @@ const ListsEmptyState = () => {
       <p className="text-secondary mt-2 mb-5 text-center text-lg leading-7">
         You can see and manage your lists once you create one.
       </p>
-      <TriggerCreateListModal />
+      <TriggerCreateListModal onOpenCreateModal={onOpenCreateModal} />
     </section>
   );
 };

@@ -1,14 +1,21 @@
 import IconButton, {
   IconButtonSizes,
   IconButtonVariant,
-} from "../../buttons/IconButton";
-import { AddIcon, ListIcon } from "../../icons";
+} from "../../ui/buttons/IconButton";
+import { AddIcon, ListIcon } from "../../ui/icons";
 
-const TriggerCreateListModal = () => {
+interface TriggerCreateListModalProps {
+  onOpenCreateModal: () => void;
+}
+
+const TriggerCreateListModal = (props: TriggerCreateListModalProps) => {
+  const { onOpenCreateModal } = props;
+
   return (
-    <button
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <div
       className="border-primary-border hover:bg-screen-secondary w-full max-w-[320px] cursor-pointer rounded-2xl border p-4 transition-all duration-150 ease-in"
-      type="button"
+      onClick={onOpenCreateModal}
     >
       <div className="flex items-center justify-between">
         <IconButton
@@ -30,7 +37,7 @@ const TriggerCreateListModal = () => {
           Organize items into a new shortlist
         </span>
       </div>
-    </button>
+    </div>
   );
 };
 

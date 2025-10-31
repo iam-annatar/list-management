@@ -17,11 +17,12 @@ interface IconButtonProps {
   icon: JSX.Element;
   variant: IconButtonVariant;
   size: IconButtonSizes;
+  className?: string;
   onClick?: () => void;
 }
 
 const IconButton = (props: IconButtonProps) => {
-  const { icon, variant, size, onClick } = props;
+  const { icon, variant, size, className, onClick } = props;
 
   const variantClassNames = {
     primary: "bg-transparent",
@@ -39,9 +40,10 @@ const IconButton = (props: IconButtonProps) => {
       type="button"
       onClick={onClick}
       className={clsx(
-        "flex items-center justify-center rounded-[14px] px-2",
+        "flex cursor-pointer items-center justify-center rounded-[14px] px-2",
         variantClassNames[variant],
         sizesClassName[size],
+        className,
       )}
     >
       {icon}
