@@ -15,5 +15,5 @@ export const formSchema = z.object({
   subtitle: z
     .string()
     .nonempty({ error: "A subtitle is required!" })
-    .max(50, { error: "Subtitle must Not be more than 50 characters." }),
+    .max(150, { error: "Subtitle must Not be more than 150 characters." }),
 }) satisfies z.ZodType<FormListData>;

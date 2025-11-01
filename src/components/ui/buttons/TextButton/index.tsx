@@ -10,6 +10,7 @@ export enum TextButtonSizes {
 export enum TextButtonVariants {
   Primary = "primary",
   Secondary = "secondary",
+  Destructive = "destructive",
 }
 
 interface TextButtonProps {
@@ -28,6 +29,7 @@ const TextButton = (props: TextButtonProps) => {
   const variantClassNames = {
     primary: "border border-primary-border bg-transparent",
     secondary: "bg-secondary text-screen-primary [&>svg]:text-screen-primary",
+    destructive: "bg-screen-tertiary text-warning [&>svg]:text-warning",
   };
 
   const sizesClassName = {

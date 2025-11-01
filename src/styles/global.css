@@ -9,6 +9,7 @@
   /* Main colors */
   --color-screen-primary: #121212;
   --color-screen-secondary: #1e1e1e;
+  --color-screen-tertiary: #fef4f9;
   --color-primary: #e0e0e0;
   --color-secondary: #b0b0b0;
   --color-warning: #eb108b;
@@ -16,7 +17,6 @@
 
   /* Borders/Dividers */
   --color-primary-border: #444444;
-
   /* Accent colors */
   --color-accent: #888888;
 

@@ -10,7 +10,7 @@ const ListsEmptyState = (props: ListsEmptyStateProps) => {
   return (
     <section
       aria-label="List management intro"
-      className="flex h-screen flex-col items-center justify-center"
+      className="flex h-screen flex-col items-center justify-center px-5"
     >
       <h1 className="text-size-xl text-center leading-8 font-semibold">
         Create Your First List!

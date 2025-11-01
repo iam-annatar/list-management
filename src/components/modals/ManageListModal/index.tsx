@@ -1,32 +1,80 @@
+import { useEffect } from "react";
 import { Controller } from "react-hook-form";
 
-import type { FormListData } from "../../types";
+import type { FormListData, ListItem } from "../../../types";
 
-import { useCreateListForm } from "../../hooks/useCreateListForm";
-import Modal from "../shared/Modal";
+import { useManageListForm } from "../../../hooks/useManageListForm";
+import Modal from "../../shared/Modal";
 import TextButton, {
   TextButtonSizes,
   TextButtonVariants,
-} from "../ui/buttons/TextButton";
-import { AddIcon } from "../ui/icons";
-import Input from "../ui/Input";
+} from "../../ui/buttons/TextButton";
+import { AddIcon } from "../../ui/icons";
+import Input from "../../ui/Input";
 
-interface CreateListModalProps {
+interface ManageListModalProps {
   isOpen: boolean;
+  modalMode: "create" | "edit";
+  initialValues: ListItem | null;
+  onCreate: (item: ListItem) => void;
+  onEdit: (updatedItem: ListItem) => void;
   onClose: () => void;
 }
 
-const CreateListModal = (props: CreateListModalProps) => {
-  const { isOpen, onClose } = props;
+const ManageListModal = (props: ManageListModalProps) => {
+  const { isOpen, modalMode, initialValues, onCreate, onEdit, onClose } = props;
 
-  const { control, handleSubmit } = useCreateListForm();
+  const { control, handleSubmit, reset } = useManageListForm();
+
+  useEffect(() => {
+    if (isOpen && modalMode === "edit" && initialValues) {
+      reset({
+        title: initialValues?.title,
+        subtitle: initialValues?.subtitle,
+      });
+    }
+
+    if (isOpen && modalMode === "create") {
+      reset({
+        title: "",
+        subtitle: "",
+      });
+    }
+  }, [isOpen, modalMode, initialValues, reset]);
 
   const onSubmitForm = (data: FormListData) => {
-    console.log(data);
+    const date = new Date();
+
+    if (modalMode === "create") {
+      const newItem: ListItem = {
+        id: crypto.randomUUID().slice(0, 8),
+        createdAt: date.toString(),
+        title: data.title,
+        subtitle: data.subtitle,
+      };
+
+      onCreate(newItem);
+    } else if (initialValues) {
+      const updatedItem: ListItem = {
+        id: initialValues.id,
+        createdAt: new Date().toString(),
+        title: data.title,
+        subtitle: data.subtitle,
+      };
+
+      onEdit(updatedItem);
+    }
+
+    onClose();
+    reset();
   };
 
   return (
-    <Modal isOpen={isOpen} title="Create a List" onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      title={modalMode === "create" ? "Create a List" : "Edit List"}
+      onClose={onClose}
+    >
       <form onSubmit={handleSubmit(onSubmitForm)}>
         <div className="flex w-full flex-col gap-5">
           <div
@@ -82,10 +130,10 @@ const CreateListModal = (props: CreateListModalProps) => {
         <TextButton
           size={TextButtonSizes.M}
           className="ms-auto mt-6"
-          label="Create"
+          label={modalMode === "create" ? "Create" : "Save"}
           type="submit"
           variant={TextButtonVariants.Secondary}
-          icon={<AddIcon />}
+          icon={modalMode === "create" ? <AddIcon /> : undefined}
           onClick={handleSubmit(onSubmitForm)}
         />
       </form>
@@ -93,4 +141,4 @@ const CreateListModal = (props: CreateListModalProps) => {
   );
 };
 
-export default CreateListModal;
+export default ManageListModal;

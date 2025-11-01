@@ -5,7 +5,7 @@ import type { FormListData } from "../types";
 
 import { formDefaultValues, formSchema } from "../constants";
 
-export const useCreateListForm = () => {
+export const useManageListForm = () => {
   const formMethods = useForm<FormListData>({
     defaultValues: formDefaultValues,
     resolver: zodResolver(formSchema),
