@@ -1,8 +1,8 @@
-import Modal from "../shared/Modal";
+import Modal from "../../shared/Modal";
 import TextButton, {
   TextButtonSizes,
   TextButtonVariants,
-} from "../ui/buttons/TextButton";
+} from "../../ui/buttons/TextButton";
 
 interface DeleteListModalProps {
   isOpen: boolean;
