@@ -25,17 +25,17 @@ const DeleteListModal = (props: DeleteListModalProps) => {
         <div className="flex w-full items-center gap-3">
           <TextButton
             size={TextButtonSizes.L}
-            label="Delete"
-            type="button"
-            variant={TextButtonVariants.Destructive}
-            onClick={onDelete}
-          />
-          <TextButton
-            size={TextButtonSizes.L}
             label="Cancel"
             type="button"
             variant={TextButtonVariants.Primary}
             onClick={onClose}
+          />
+          <TextButton
+            size={TextButtonSizes.L}
+            label="Delete"
+            type="button"
+            variant={TextButtonVariants.Destructive}
+            onClick={onDelete}
           />
         </div>
       </div>
